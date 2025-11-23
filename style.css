@@ -201,3 +201,14 @@ code {
     width: 100%;
   }
 }
+about {
+  text-align: center;
+  padding: 26px 20px 20px;
+}
+
+.about p {
+  max-width: 780px;
+  margin: 10px auto 0;
+  line-height: 1.55;
+  font-size: 15px;
+}
