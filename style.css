@@ -201,11 +201,11 @@ code {
     width: 100%;
   }
 }
-
 about {
   text-align: center;
   padding: 26px 20px 20px;
 }
+Это style
 
 .about p {
   max-width: 780px;
@@ -213,7 +213,6 @@ about {
   line-height: 1.55;
   font-size: 15px;
 }
-
 .lesson-info h3 {
     margin-top: 20px;
     color: #222;
