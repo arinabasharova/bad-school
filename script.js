@@ -10,24 +10,17 @@ let currentLang = "ru";
 
 function applyLang(l) {
   currentLang = l;
-
-  // show/hide by class instead of changing display
+  // show/hide blocks
   document.querySelectorAll("[data-lang]").forEach(el => {
-    if (el.getAttribute("data-lang") === l) {
-      el.classList.remove("hidden-lang");
-    } else {
-      el.classList.add("hidden-lang");
-    }
+    el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
   });
 
-  // change WhatsApp link
   const url = `https://wa.me/${NUMBER}?text=${messages[l]}`;
   ["cta-main", "cta-side", "cta-bottom"].forEach(id => {
     const a = document.getElementById(id);
     if (a) a.href = url;
   });
 
-  // save preference
   localStorage.setItem("bad-school-lang", l);
 }
 
@@ -44,9 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (saved && ["ru", "en", "de"].includes(saved)) {
     applyLang(saved);
   } else {
-    const nav = (navigator.language || "ru").toLowerCase();
-    if (nav.startsWith("de")) applyLang("de");
-    else if (nav.startsWith("en")) applyLang("en");
+    // detect from browser
+    const navLang = (navigator.language || "ru").toLowerCase();
+    if (navLang.startsWith("de")) applyLang("de");
+    else if (navLang.startsWith("en")) applyLang("en");
     else applyLang("ru");
   }
 });
