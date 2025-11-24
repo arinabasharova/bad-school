@@ -11,6 +11,7 @@ body {
   padding: 0 18px;
 }
 
+/* ==== HEADER ==== */
 header {
   display: flex;
   justify-content: space-between;
@@ -32,8 +33,17 @@ header {
   background: #fff;
   cursor: pointer;
   font-size: 12px;
+  transition: all 0.2s ease;
 }
 
+/* Active language */
+.lang-switch button.active-lang {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* ==== GENERAL CARDS ==== */
 .card {
   background: #fff;
   border-radius: 14px;
@@ -43,6 +53,7 @@ header {
   margin-bottom: 18px;
 }
 
+/* ==== HERO ==== */
 .hero {
   display: flex;
   gap: 22px;
@@ -75,6 +86,7 @@ header {
   gap: 6px;
 }
 
+/* ==== BUTTONS ==== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -97,6 +109,7 @@ header {
   color: #111;
 }
 
+/* ==== TEXT HELPERS ==== */
 .muted {
   color: #777;
   font-size: 13px;
@@ -106,6 +119,7 @@ header {
   font-size: 13px;
 }
 
+/* ==== PRICES AND FORMATS ==== */
 .hero-right .inner {
   height: 100%;
 }
@@ -140,6 +154,19 @@ header {
   margin: 10px 0;
 }
 
+/* ==== PACKS ==== */
+.packs {
+  margin: 8px 0 12px;
+  padding-left: 18px;
+  line-height: 1.45;
+}
+
+.packs li {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* ==== COURSES ==== */
 .course-list {
   list-style: none;
   padding-left: 0;
@@ -155,6 +182,7 @@ header {
   font-size: 16px;
 }
 
+/* ==== GALLERY ==== */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -174,10 +202,12 @@ header {
   object-fit: cover;
 }
 
+/* ==== PORTFOLIO ==== */
 .portfolio-links {
   margin-top: 14px;
 }
 
+/* ==== FOOTER ==== */
 footer {
   text-align: center;
   font-size: 12px;
@@ -185,6 +215,7 @@ footer {
   margin-top: 12px;
 }
 
+/* ==== CODE STYLE ==== */
 code {
   font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 12px;
@@ -193,6 +224,12 @@ code {
   background: #f2f2f2;
 }
 
+/* ==== LANGUAGE HIDE ==== */
+.hidden-lang {
+  display: none !important;
+}
+
+/* ==== MOBILE ==== */
 @media (max-width: 800px) {
   .hero {
     flex-direction: column;
@@ -201,7 +238,9 @@ code {
     width: 100%;
   }
 }
-about {
+
+/* ==== ABOUT BLOCK ==== */
+.about {
   text-align: center;
   padding: 26px 20px 20px;
 }
@@ -211,18 +250,4 @@ about {
   margin: 10px auto 0;
   line-height: 1.55;
   font-size: 15px;
-}
-.lesson-info h3 {
-    margin-top: 20px;
-    color: #222;
-    font-weight: 600;
-}
-
-.lesson-info ul {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-.lesson-info li {
-    margin: 5px 0;
 }
