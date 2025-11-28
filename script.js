@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ind.textContent = "40 €";
       grp.textContent = "35 €";
     } else if (lang === "en") {
-      ind.textContent = "$40";
-      grp.textContent = "$45";
+      ind.textContent = "$45";
+      grp.textContent = "$40";
     } else if (lang === "ru") {
       ind.textContent = "1500 ₽";
       grp.textContent = "1000 ₽";
