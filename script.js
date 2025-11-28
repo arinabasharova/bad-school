@@ -10,6 +10,23 @@ let currentLang = "ru";
 
 function applyLang(l) {
   currentLang = l;
+
+  // переключение цен
+  applyPrices(l);
+
+  // show/hide blocks
+  document.querySelectorAll("[data-lang]").forEach(el => {
+    el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
+  });
+
+  const url = `https://wa.me/${NUMBER}?text=${messages[l]}`;
+  ["cta-main", "cta-side", "cta-bottom"].forEach(id => {
+    const a = document.getElementById(id);
+    if (a) a.href = url;
+  });
+
+  localStorage.setItem("bad-school-lang", l);
+}
   // show/hide blocks
   document.querySelectorAll("[data-lang]").forEach(el => {
     el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
@@ -43,4 +60,29 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (navLang.startsWith("en")) applyLang("en");
     else applyLang("ru");
   }
+  // === PRICE SWITCHER ===
+function applyPrices(lang) {
+  const priceIndividual = document.getElementById("price-individual");
+  const priceGroup = document.getElementById("price-group");
+
+  if (!priceIndividual || !priceGroup) return;
+
+  switch (lang) {
+    case "de": // немецкий
+      priceIndividual.textContent = "40 €";
+      priceGroup.textContent = "35 €";
+      break;
+
+    case "en": // английский
+      priceIndividual.textContent = "$40";
+      priceGroup.textContent = "$45";
+      break;
+
+    case "ru": // русский
+      priceIndividual.textContent = "1500 ₽";
+      priceGroup.textContent = "1000 ₽";
+      break;
+  }
+}
 });
+
