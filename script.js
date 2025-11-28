@@ -8,81 +8,63 @@ const messages = {
 
 let currentLang = "ru";
 
-function applyLang(l) {
-  currentLang = l;
-
-  // переключение цен
-  applyPrices(l);
-
-  // show/hide blocks
-  document.querySelectorAll("[data-lang]").forEach(el => {
-    el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
-  });
-
-  const url = `https://wa.me/${NUMBER}?text=${messages[l]}`;
-  ["cta-main", "cta-side", "cta-bottom"].forEach(id => {
-    const a = document.getElementById(id);
-    if (a) a.href = url;
-  });
-
-  localStorage.setItem("bad-school-lang", l);
-}
-  // show/hide blocks
-  document.querySelectorAll("[data-lang]").forEach(el => {
-    el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
-  });
-
-  const url = `https://wa.me/${NUMBER}?text=${messages[l]}`;
-  ["cta-main", "cta-side", "cta-bottom"].forEach(id => {
-    const a = document.getElementById(id);
-    if (a) a.href = url;
-  });
-
-  localStorage.setItem("bad-school-lang", l);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  // language buttons
-  document.querySelectorAll("[data-set-lang]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      applyLang(btn.getAttribute("data-set-lang"));
+
+  // === ПЕРЕКЛЮЧЕНИЕ ЦЕН ===
+  function applyPrices(lang) {
+    const ind = document.getElementById("price-individual");
+    const grp = document.getElementById("price-group");
+
+    if (!ind || !grp) return;
+
+    if (lang === "de") {
+      ind.textContent = "40 €";
+      grp.textContent = "35 €";
+    } else if (lang === "en") {
+      ind.textContent = "$40";
+      grp.textContent = "$45";
+    } else if (lang === "ru") {
+      ind.textContent = "1500 ₽";
+      grp.textContent = "1000 ₽";
+    }
+  }
+
+  // === ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ===
+  function applyLang(l) {
+    currentLang = l;
+
+    // обновляем цены
+    applyPrices(l);
+
+    // показываем нужные тексты
+    document.querySelectorAll("[data-lang]").forEach(el => {
+      el.style.display = el.getAttribute("data-lang") === l ? "block" : "none";
     });
+
+    // Whatsapp ссылка
+    const url = `https://wa.me/${NUMBER}?text=${messages[l]}`;
+    ["cta-main", "cta-side", "cta-bottom"].forEach(id => {
+      const a = document.getElementById(id);
+      if (a) a.href = url;
+    });
+
+    // сохраняем язык
+    localStorage.setItem("bad-school-lang", l);
+  }
+
+  // кнопки языка
+  document.querySelectorAll("[data-set-lang]").forEach(btn => {
+    btn.addEventListener("click", () => applyLang(btn.dataset.setLang));
   });
 
-  // initial language
+  // выбираем язык при загрузке
   const saved = localStorage.getItem("bad-school-lang");
   if (saved && ["ru", "en", "de"].includes(saved)) {
     applyLang(saved);
   } else {
-    // detect from browser
-    const navLang = (navigator.language || "ru").toLowerCase();
-    if (navLang.startsWith("de")) applyLang("de");
-    else if (navLang.startsWith("en")) applyLang("en");
+    const nav = (navigator.language || "ru").toLowerCase();
+    if (nav.startsWith("de")) applyLang("de");
+    else if (nav.startsWith("en")) applyLang("en");
     else applyLang("ru");
   }
-  // === PRICE SWITCHER ===
-function applyPrices(lang) {
-  const priceIndividual = document.getElementById("price-individual");
-  const priceGroup = document.getElementById("price-group");
-
-  if (!priceIndividual || !priceGroup) return;
-
-  switch (lang) {
-    case "de": // немецкий
-      priceIndividual.textContent = "40 €";
-      priceGroup.textContent = "35 €";
-      break;
-
-    case "en": // английский
-      priceIndividual.textContent = "$40";
-      priceGroup.textContent = "$45";
-      break;
-
-    case "ru": // русский
-      priceIndividual.textContent = "1500 ₽";
-      priceGroup.textContent = "1000 ₽";
-      break;
-  }
-}
 });
-
